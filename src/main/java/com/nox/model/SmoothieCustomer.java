@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class SmoothieCustomer {
 
     @Id
-    private String smoothieId;
+    private String smoothieCustomerId;
     private List<Smoothie> smoothie;
 
 }

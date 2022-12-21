@@ -40,7 +40,7 @@ public class SmoothieServiceImpl implements SmoothieService {
                     .smoothieNutritionValue(request.getSmoothieNutritionValue()).smoothiePrice(request.getSmoothiePrice()).smoothieAddedBy(adminId)
                     .smoothieIngredients(request.getSmoothieIngredients()).build());
             newCustomer.setSmoothie(smoothies);
-            newCustomer.setSmoothieId(adminId);
+            newCustomer.setSmoothieCustomerId(adminId);
             smoothieRepository.insert(newCustomer);
         }
         return null;
