@@ -31,6 +31,10 @@ public class SmoothieServiceImpl implements SmoothieService {
 
     private static final String ADMIN_ROLE = "business-owner";
 
+    /**
+     * Create Smoothie is possible only via business-owner. Loggedin User role is checked and data is saved in database
+     * 
+     */
     @Override
     public SmoothieDetailsResponse createSmoothie(CreateSmoothieRequest request, Map<String, String> user) {
         SmoothieCustomer newCustomer;
@@ -78,6 +82,9 @@ public class SmoothieServiceImpl implements SmoothieService {
         }
     }
 
+    /**
+     * Update Smoothie is only accessible to business-owner. LoggedIn User role is verified as business-owner and data is persisted accordingly
+     */
     @Override
     public SmoothieDetailsResponse updateSmoothie(UpdateSmoothieRequest request, Map<String, String> user) {
         String adminId = user.get("userId");
