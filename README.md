@@ -25,12 +25,14 @@ Functionalities to be updated and Junit Test to be added.
 ## Running the service with an IDE (i.e. IntelliJ IDEA, STS Eclipse)
 
 Clone the service to your computer using the command below:
+
 ```sh
 git clone https://github.com/Nox69/smoothie-details-service.git
 cd smoothie-details-service
 ```
 
-Run the Postgres database using the command below: (Docker must be installed)
+Run the MongoDB database using the command below: (Docker must be installed)
+
 ```sh
 docker-compose up
 ```
@@ -40,17 +42,19 @@ Import the service in your favourite IDE, i.e. IntelliJ IDEA and execute the mai
 ## Running the service without an IDE
 
 Clone the service to your computer using the command below:
+
 ```sh
-git clone https://github.com/Nox69/smoothie-authentication-service.git
+git clone https://github.com/Nox69/smoothie-details-service.git
 cd smoothie-details-service
 ```
 
 Start/update the service using the command below:
 
 ```sh
-./ docker-compose up -d --build
-mvn clean install
-java -jar app.jar
+docker-compose up
+mvn clean -DskipTests=true install
+docker build -t smoothie-details-service .
+docker run -p 8085:8085 smoothie-details-service
 ```
 
 Stop the service using the command below:
