@@ -72,7 +72,8 @@ Run the following cURL command to create a new smoothie in the service.
 
 ```sh
 curl -X POST \
-    -H "Content-Type: application/json" \
+    -H "Content-Type: application/json"
+    -H "Authorization: Bearer {token}" \
     -d '{
     	"smoothieName": "Orange Protien Smoothie",
     	"smoothieIngredients": "Orange, Milk, Greek Yoghurt, Strawberry Icecream",
@@ -85,6 +86,7 @@ Run the following cURL command to retrieve all smoothies.
 
 ```sh
 curl -X GET \
-    -H "Content-Type: application/json" \
+    -H "Content-Type: application/json"
+    -H "Authorization: Bearer {token}" \
     	http://localhost:8085/v1/api/smoothies -v
 ```
