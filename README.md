@@ -20,6 +20,7 @@ I used MongoDB to manage database migrations and [JPA].
 ### Code Structure
 
 All API endpoints are located in `com.nox.controller` package. Open API.yml to be added soon.
+Functionalities to be updated and Junit Test to be added.
 
 ## Running the service with an IDE (i.e. IntelliJ IDEA, STS Eclipse)
 

@@ -1,21 +1,18 @@
 package com.nox.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nox.exception.SmoothieNotFoundException;
 import com.nox.model.Smoothie;
 import com.nox.model.SmoothieCustomer;
 import com.nox.repository.SmoothieRepository;
 import com.nox.resources.CreateSmoothieRequest;
-import com.nox.resources.SmoothieDetailsResponse;
-import com.nox.resources.UpdateSmoothieRequest;
 
 import lombok.RequiredArgsConstructor;
 
@@ -49,26 +46,15 @@ public class SmoothieServiceImpl implements SmoothieService {
         return null;
     }
 
-
-    @Override
-    public boolean deleteSmoothie(String id, String adminId) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
     @Override
     public List<SmoothieCustomer> retrieveAllSmoothies() {
         return smoothieRepository.findAll();
     }
 
     @Override
-    public SmoothieDetailsResponse retrieveBySmoothieId(String id, String adminId) {
-        return null;
-    }
-
-    @Override
     public List<Smoothie> retrieveByAdminId(String admindId) {
-        return smoothieRepository.findById(admindId).get().getSmoothie();
+        Optional<SmoothieCustomer> smoothieCustomer = smoothieRepository.findById(admindId);
+        return smoothieCustomer.isPresent() ? smoothieCustomer.get().getSmoothie() : Collections.emptyList();
     }
 
 }
