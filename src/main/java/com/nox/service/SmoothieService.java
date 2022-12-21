@@ -1,17 +1,19 @@
 package com.nox.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.nox.model.Smoothie;
-import com.nox.model.SmoothieCustomer;
 import com.nox.resources.CreateSmoothieRequest;
+import com.nox.resources.SmoothieDetailsResponse;
+import com.nox.resources.UpdateSmoothieRequest;
 
 public interface SmoothieService {
 
-    public Smoothie createSmoothie(CreateSmoothieRequest request, String adminId);
+    public SmoothieDetailsResponse createSmoothie(CreateSmoothieRequest request, Map<String, String> user);
 
-    public List<SmoothieCustomer> retrieveAllSmoothies();
+    public List<Smoothie> retrieveByIdAndRole(Map<String, String> user);
 
-    public List<Smoothie> retrieveByAdminId(String adminId);
+    public SmoothieDetailsResponse updateSmoothie(UpdateSmoothieRequest request, Map<String, String> user);
 
 }

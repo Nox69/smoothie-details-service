@@ -2,19 +2,20 @@ package com.nox.resources;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class SmoothieDetailsResponse {
+public class UpdateSmoothieRequest {
 
-    private String smoothieId;
     private String smoothieName;
+    @NotNull
+    private String smoothieId;
     private String smoothieIngredients;
     private BigDecimal smoothieNutritionValue;
     private BigDecimal smoothiePrice;

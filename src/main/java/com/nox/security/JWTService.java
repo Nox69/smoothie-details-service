@@ -1,6 +1,8 @@
 package com.nox.security;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,14 +17,17 @@ import io.jsonwebtoken.Jwts;
 @Service
 public class JWTService {
 
-    public static final String AUTHORIZATION_HEADER = "Authorization";
-    public static final String TOKEN_SEPERATOR = " ";
+    private static final String AUTHORIZATION_HEADER = "Authorization";
+    private static final String TOKEN_SEPERATOR = " ";
 
-    public String getAuthenticatedCustomer() {
+    public Map<String, String> getAuthenticatedCustomer() {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         if (requestAttributes instanceof ServletRequestAttributes) {
             HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
-            return getUsernameFromToken(Arrays.asList(request.getHeader(AUTHORIZATION_HEADER).split(TOKEN_SEPERATOR)).get(1));
+            Map<String, String> user = new HashMap<>();
+            user.put("userId", getUsernameFromToken(Arrays.asList(request.getHeader(AUTHORIZATION_HEADER).split(TOKEN_SEPERATOR)).get(1)));
+            user.put("role", getRoleFromToken(Arrays.asList(request.getHeader(AUTHORIZATION_HEADER).split(TOKEN_SEPERATOR)).get(1)));
+            return user;
         }
         return null;
     }
@@ -30,6 +35,11 @@ public class JWTService {
     public String getUsernameFromToken(String token) {
         Claims claims = Jwts.parser().setSigningKey(JwtFilter.SECRET_KEY).parseClaimsJws(token).getBody();
         return claims.getSubject();
+    }
+
+    public String getRoleFromToken(String token) {
+        Claims claims = Jwts.parser().setSigningKey(JwtFilter.SECRET_KEY).parseClaimsJws(token).getBody();
+        return claims.containsKey("role") ? claims.get("role").toString() : null;
     }
 
 }
